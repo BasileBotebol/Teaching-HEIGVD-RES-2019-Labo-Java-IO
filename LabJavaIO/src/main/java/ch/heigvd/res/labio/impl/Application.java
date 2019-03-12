@@ -7,10 +7,8 @@ import ch.heigvd.res.labio.interfaces.IFileExplorer;
 import ch.heigvd.res.labio.interfaces.IFileVisitor;
 import ch.heigvd.res.labio.quotes.QuoteClient;
 import ch.heigvd.res.labio.quotes.Quote;
-import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
+
+import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
@@ -123,7 +121,32 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    String filePath = WORKSPACE_DIRECTORY;
+    String fileSeparator = System.getProperty("file.separator");
+    for (String tag : quote.getTags()){
+      filePath += fileSeparator + tag;
+    }
+    File directory = new File(filePath);
+    if (!directory.isDirectory()){
+      directory.mkdirs();
+    }
+    File file = new File (filePath + fileSeparator + filename);
+    file.createNewFile();
+
+
+     FileOutputStream fop = new FileOutputStream(file);
+
+      // if file doesn't exists, then create it
+      if (!file.exists()) {
+        file.createNewFile();
+      }
+
+      // get the content in bytes
+      byte[] contentInBytes = quote.getQuote().getBytes();
+
+      fop.write(contentInBytes);
+      fop.flush();
+      fop.close();
   }
   
   /**
@@ -135,7 +158,7 @@ public class Application implements IApplication {
     explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
       @Override
       public void visit(File file) {
-        /*
+        /*ec
          * There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
          * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
          * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
