@@ -26,7 +26,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
   }
 
   int numLigne = 0;
-  int previous = 0;
+  int precedent = 0;
   @Override
   public void write(String str, int off, int len) throws IOException {
     for (int i = off; i < off + len; i++) {
@@ -43,7 +43,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(int c) throws IOException {
-    if (numLigne == 0 || previous == '\r' && c != '\n') {
+    if (numLigne == 0 || precedent == '\r' && c != '\n') {
       for (char ch : (++numLigne + "\t").toCharArray())
         super.write(ch);
     }
@@ -52,7 +52,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
       for (char ch : (++numLigne + "\t").toCharArray())
         super.write(ch);
     }
-    previous = c;
+    precedent = c;
   }
 
 }
