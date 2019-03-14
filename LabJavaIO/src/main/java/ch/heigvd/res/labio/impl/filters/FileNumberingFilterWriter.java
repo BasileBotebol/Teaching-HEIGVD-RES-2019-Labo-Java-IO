@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.logging.Logger;
 
+
+
 /**
  * This class transforms the streams of character sent to the decorated writer.
  * When filter encounters a line separator, it sends it to the decorated writer.
@@ -25,17 +27,17 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(String str, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+
   }
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+
   }
 
   @Override
   public void write(int c) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+
   }
 
 }

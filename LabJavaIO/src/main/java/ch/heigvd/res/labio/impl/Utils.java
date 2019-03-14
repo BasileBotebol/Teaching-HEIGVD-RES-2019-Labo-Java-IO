@@ -28,9 +28,10 @@ public class Utils {
     } else   if (lines.contains("\r")){
       delim = "\r";
     }else {
-      String[] result ={"", lines};
-      return result;
+      String[] str ={"", lines};
+      return str;
     }
+
     String linesArray[] = lines.split( "(\r\n|\r|\n)", 2);
     linesArray[0] += delim;
     return  linesArray;
