@@ -25,19 +25,34 @@ public class FileNumberingFilterWriter extends FilterWriter {
     super(out);
   }
 
+  int numLigne = 0;
+  int previous = 0;
   @Override
   public void write(String str, int off, int len) throws IOException {
-
+    for (int i = off; i < off + len; i++) {
+      write(str.charAt(i));
+    }
   }
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-
+    for (int i = 0; i < off + len; i++) {
+      write(cbuf[i]);
+    }
   }
 
   @Override
   public void write(int c) throws IOException {
-
+    if (numLigne == 0 || previous == '\r' && c != '\n') {
+      for (char ch : (++numLigne + "\t").toCharArray())
+        super.write(ch);
+    }
+    super.write(c);
+    if (c == '\n') {
+      for (char ch : (++numLigne + "\t").toCharArray())
+        super.write(ch);
+    }
+    previous = c;
   }
 
 }

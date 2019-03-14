@@ -16,7 +16,7 @@ public class UpperCaseFilterWriter extends FilterWriter {
 
   @Override
   public void write(String str, int off, int len) throws IOException {
-    out.write(str.substring(off, off+len).toUpperCase());
+    out.write(str.toUpperCase(), off, len);
   }
 
   @Override
