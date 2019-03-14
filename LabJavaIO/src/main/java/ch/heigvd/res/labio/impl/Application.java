@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 
+
 /**
  *
  * @author Olivier Liechti
@@ -125,16 +126,17 @@ public class Application implements IApplication {
     if (!directory.isDirectory()){
       directory.mkdirs();
     }
-    File file = new File (filePath + fileSeparator + filename);
-    file.createNewFile();
+   File file = new File (filePath + fileSeparator + filename);
+    //file.createNewFile();
 
+    if (!file.exists()) {
+      file.createNewFile();
+    }
 
      FileOutputStream fop = new FileOutputStream(file);
 
       // if file doesn't exists, then create it
-      if (!file.exists()) {
-        file.createNewFile();
-      }
+
 
       // get the content in bytes
       byte[] contentInBytes = quote.getQuote().getBytes();
