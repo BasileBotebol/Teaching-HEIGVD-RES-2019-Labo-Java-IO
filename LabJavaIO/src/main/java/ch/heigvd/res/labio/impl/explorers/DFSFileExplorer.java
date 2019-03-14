@@ -26,20 +26,10 @@ public class DFSFileExplorer implements IFileExplorer {
     File[] files = rootDirectory.listFiles();
     if (files != null) {
       Arrays.sort(files);
-
-
       for (File file : files) {
-        if (file.isDirectory()) {
           explore(file, visitor);
         }
       }
-      for (File file : files) {
-        if (file.isFile()) {
-          explore(file, visitor);
-        }
-      }
-    }
-
   }
 
 }
